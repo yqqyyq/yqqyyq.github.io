@@ -16,15 +16,15 @@
   <meta name="author" content="panza">
   <meta name="keywords" content="">
   
-    <meta name="description" content="准备存储卷1mkdir .&#x2F;data  创建docker-compose.yml创建文件: &#x2F;usr&#x2F;local&#x2F;mysql57&#x2F;docker-compose.yml, 内容如下: 123456789101112131415161718192021222324version: &amp;#x27;3.8&amp;#x27;services:  mysql57:    restart: always    imag">
+    <meta name="description" content="此文章来源 panza Docker部署MySQL-5.7 @panza .Docker部署MySQL-5.7  准备存储卷1mkdir .&#x2F;data  创建docker-compose.yml创建文件: &#x2F;usr&#x2F;local&#x2F;mysql57&#x2F;docker-compose.yml, 内容如下: 123456789101112131415161718192021222324version: &amp;#x2">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker部署MySQL-5.7">
 <meta property="og:url" content="https://yqqyyq.github.io/2022/12/13/docker/docker_mysql_5.7/index.html">
 <meta property="og:site_name" content="yqqyyq">
-<meta property="og:description" content="准备存储卷1mkdir .&#x2F;data  创建docker-compose.yml创建文件: &#x2F;usr&#x2F;local&#x2F;mysql57&#x2F;docker-compose.yml, 内容如下: 123456789101112131415161718192021222324version: &amp;#x27;3.8&amp;#x27;services:  mysql57:    restart: always    imag">
+<meta property="og:description" content="此文章来源 panza Docker部署MySQL-5.7 @panza .Docker部署MySQL-5.7  准备存储卷1mkdir .&#x2F;data  创建docker-compose.yml创建文件: &#x2F;usr&#x2F;local&#x2F;mysql57&#x2F;docker-compose.yml, 内容如下: 123456789101112131415161718192021222324version: &amp;#x2">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-13T01:59:31.000Z">
-<meta property="article:modified_time" content="2022-12-13T02:37:43.563Z">
+<meta property="article:modified_time" content="2022-12-13T02:40:19.000Z">
 <meta property="article:author" content="yqqyyq">
 <meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary_large_image">
@@ -241,7 +241,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          721 字
+          772 字
         
       </span>
     
@@ -372,7 +372,10 @@
             
               <div class="markdown-body">
                 
-                <h1 id="准备存储卷"><a href="#准备存储卷" class="headerlink" title="准备存储卷"></a>准备存储卷</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> ./data<br></code></pre></td></tr></table></figure>
+                <blockquote><p>此文章来源 panza Docker部署MySQL-5.7</p>
+<footer><strong>@panza .</strong><cite><a target="_blank" rel="noopener" href="https://www.fenston.top/2021/11/30/docker/Docker部署MySQL-5.7/">Docker部署MySQL-5.7</a></cite></footer></blockquote>
+
+<h1 id="准备存储卷"><a href="#准备存储卷" class="headerlink" title="准备存储卷"></a>准备存储卷</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> ./data<br></code></pre></td></tr></table></figure>
 
 <h1 id="创建docker-compose-yml"><a href="#创建docker-compose-yml" class="headerlink" title="创建docker-compose.yml"></a>创建docker-compose.yml</h1><p>创建文件: <code>/usr/local/mysql57/docker-compose.yml</code>, 内容如下:</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.8&#x27;</span><br><span class="hljs-attr">services:</span><br>  <span class="hljs-attr">mysql57:</span><br>    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">mysql:5.7.22</span><br>    <span class="hljs-attr">hostname:</span> <span class="hljs-string">vm-mysql57</span><br>    <span class="hljs-attr">container_name:</span> <span class="hljs-string">mysql57</span><br>    <span class="hljs-attr">environment:</span><br>      <span class="hljs-attr">TZ:</span> <span class="hljs-string">Asia/Shanghai</span><br>      <span class="hljs-attr">LANG:</span> <span class="hljs-string">en_US.UTF-8</span><br>      <span class="hljs-attr">MYSQL_ROOT_PASSWORD:</span> <span class="hljs-string">admin</span><br>    <span class="hljs-attr">volumes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/etc/localtime:/etc/localtime:ro</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/etc/timezone:/etc/timezone:ro</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">./data:/var/lib/mysql</span><br>    <span class="hljs-attr">command:</span><br>      <span class="hljs-string">--character-set-server=utf8mb4</span><br>      <span class="hljs-string">--collation-server=utf8mb4_general_ci</span><br>      <span class="hljs-string">--explicit_defaults_for_timestamp=true</span><br>      <span class="hljs-string">--lower_case_table_names=1</span><br>      <span class="hljs-string">--max_allowed_packet=128M</span><br>      <span class="hljs-string">--sql-mode=&quot;STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO&quot;</span><br>    <span class="hljs-attr">ports:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-number">3306</span><span class="hljs-string">:3306</span><br></code></pre></td></tr></table></figure>
