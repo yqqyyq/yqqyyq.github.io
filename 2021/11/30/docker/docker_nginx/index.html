@@ -16,24 +16,24 @@
   <meta name="author" content="yqqyyq">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="需求说明两台Tomcat服务通过Nginx反向代理  Nginx 服务器：192.168.75.145:80 Tomcat1 服务器：192.168.75.145:9090 Tomcat2 服务器：192.168.75.145:9091  Tomcat部署启动 Tomcat 容器 123456789101112version: &amp;#x27;3&amp;#x27;services:  tomcat1:">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://yqqyyq.github.io/2022/06/10/hello-world/index.html">
+<meta property="og:title" content="Docker部署Nginx-反向代理">
+<meta property="og:url" content="https://yqqyyq.github.io/2021/11/30/docker/docker_nginx/index.html">
 <meta property="og:site_name" content="yqqyyq">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="需求说明两台Tomcat服务通过Nginx反向代理  Nginx 服务器：192.168.75.145:80 Tomcat1 服务器：192.168.75.145:9090 Tomcat2 服务器：192.168.75.145:9091  Tomcat部署启动 Tomcat 容器 123456789101112version: &amp;#x27;3&amp;#x27;services:  tomcat1:">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-06-09T16:20:04.000Z">
+<meta property="article:published_time" content="2021-11-30T01:59:31.000Z">
 <meta property="article:modified_time" content="2022-12-13T02:00:31.888Z">
 <meta property="article:author" content="yqqyyq">
-<meta property="article:tag" content="hello">
+<meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Hello World - yqqyyq</title>
+  <title>Docker部署Nginx-反向代理 - yqqyyq</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -213,7 +213,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hello World"></span>
+            <span id="subtitle" data-typed-text="Docker部署Nginx-反向代理"></span>
           
         </div>
 
@@ -229,8 +229,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-06-10 00:20" pubdate>
-          2022年6月10日 凌晨
+        <time datetime="2021-11-30 09:59" pubdate>
+          2021年11月30日 上午
         </time>
       </span>
     
@@ -241,7 +241,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          367 字
+          1.5k 字
         
       </span>
     
@@ -252,7 +252,7 @@
         
         
         
-          4 分钟
+          13 分钟
         
       </span>
     
@@ -305,17 +305,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="hello"
-        id="heading-5d41402abc4b2a76b9719d911017c592" role="tab" data-toggle="collapse" href="#collapse-5d41402abc4b2a76b9719d911017c592"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="容器技术"
+        id="heading-196920ee492a03af919613ddd6793c93" role="tab" data-toggle="collapse" href="#collapse-196920ee492a03af919613ddd6793c93"
         aria-expanded="true"
       >
-        hello
-        <span class="list-group-count">(1)</span>
+        容器技术
+        <span class="list-group-count">(2)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-5d41402abc4b2a76b9719d911017c592"
-           role="tabpanel" aria-labelledby="heading-5d41402abc4b2a76b9719d911017c592">
+      <div class="category-collapse collapse show" id="collapse-196920ee492a03af919613ddd6793c93"
+           role="tabpanel" aria-labelledby="heading-196920ee492a03af919613ddd6793c93">
         
         
           
@@ -324,10 +324,19 @@
     
       
       
-        <a href="/2022/06/10/hello-world/" title="Hello World"
+        <a href="/2022/12/13/docker/docker_mysql_5.7/" title="Docker部署MySQL-5.7"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Docker部署MySQL-5.7</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/11/30/docker/docker_nginx/" title="Docker部署Nginx-反向代理"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">Hello World</span>
+          <span class="category-post">Docker部署Nginx-反向代理</span>
         </a>
       
     
@@ -350,7 +359,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Hello World</h1>
+            <h1 style="display: none">Docker部署Nginx-反向代理</h1>
             
               <p class="note note-info">
                 
@@ -363,19 +372,21 @@
             
               <div class="markdown-body">
                 
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
+                <h1 id="需求说明"><a href="#需求说明" class="headerlink" title="需求说明"></a>需求说明</h1><p>两台Tomcat服务通过Nginx反向代理</p>
+<ul>
+<li>Nginx 服务器：192.168.75.145:80</li>
+<li>Tomcat1 服务器：192.168.75.145:9090</li>
+<li>Tomcat2 服务器：192.168.75.145:9091</li>
+</ul>
+<h1 id="Tomcat部署"><a href="#Tomcat部署" class="headerlink" title="Tomcat部署"></a>Tomcat部署</h1><p>启动 Tomcat 容器</p>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">version</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&#x27;3&#x27;</span><br><span class="hljs-attribute">services</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">tomcat1</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">image</span><span class="hljs-punctuation">:</span> <span class="hljs-string">tomcat</span><br>    <span class="hljs-attribute">container_name</span><span class="hljs-punctuation">:</span> <span class="hljs-string">tomcat1</span><br>    <span class="hljs-attribute">ports</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">9090:8080</span><br>  <span class="hljs-attribute">tomcat2</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">image</span><span class="hljs-punctuation">:</span> <span class="hljs-string">tomcat</span><br>    <span class="hljs-attribute">container_name</span><span class="hljs-punctuation">:</span> <span class="hljs-string">tomcat2</span><br>    <span class="hljs-attribute">ports</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">9091:8080</span><br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
+<h1 id="Nginx部署"><a href="#Nginx部署" class="headerlink" title="Nginx部署"></a>Nginx部署</h1><h2 id="准备存储卷"><a href="#准备存储卷" class="headerlink" title="准备存储卷"></a>准备存储卷</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haskell"><span class="hljs-title">mkdir</span> <span class="hljs-class"><span class="hljs-keyword">data</span> conf</span><br></code></pre></td></tr></table></figure>
+<h2 id="准备Nginx配置文件"><a href="#准备Nginx配置文件" class="headerlink" title="准备Nginx配置文件"></a>准备Nginx配置文件</h2><p>创建Nginx配置文件: <code>/usr/local/nginx/conf/nginx.conf</code>, 内容如下:</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">user</span>  nginx;<br><span class="hljs-attribute">worker_processes</span>  <span class="hljs-number">1</span>;<br><span class="hljs-section">events</span> &#123;<br>    <span class="hljs-attribute">worker_connections</span>  <span class="hljs-number">1024</span>;<br>&#125;<br><span class="hljs-section">http</span> &#123;<br>    <span class="hljs-attribute">include</span>       mime.types;<br>    <span class="hljs-attribute">default_type</span>  application/octet-stream;<br>    <span class="hljs-attribute">sendfile</span>        <span class="hljs-literal">on</span>;<br>    <span class="hljs-attribute">keepalive_timeout</span>  <span class="hljs-number">65</span>;<br>	<span class="hljs-comment"># 配置一个代理即 tomcat1 服务器</span><br>	<span class="hljs-section">upstream</span> tomcatServer1 &#123;<br>		<span class="hljs-attribute">server</span> <span class="hljs-number">192.168.75.145:9090</span>;<br>	&#125;<br>	<span class="hljs-comment"># 配置一个代理即 tomcat2 服务器</span><br>	<span class="hljs-section">upstream</span> tomcatServer2 &#123;<br>		<span class="hljs-attribute">server</span> <span class="hljs-number">192.168.75.145:9091</span>;<br>	&#125;<br>	<span class="hljs-comment"># 配置一个虚拟主机</span><br>	<span class="hljs-section">server</span> &#123;<br>		<span class="hljs-attribute">listen</span> <span class="hljs-number">81</span>;<br>		<span class="hljs-attribute">server_name</span> admin.service.itoken.funtl.com;<br>		<span class="hljs-section">location</span> / &#123;<br>				<span class="hljs-comment"># 域名 admin.service.itoken.funtl.com 的请求全部转发到 tomcat_server1 即 tomcat1 服务上</span><br>				<span class="hljs-attribute">proxy_pass</span> http://tomcatServer1;<br>				<span class="hljs-comment"># 欢迎页面，按照从左到右的顺序查找页面</span><br>				<span class="hljs-attribute">index</span> index.jsp index.html index.htm;<br>		&#125;<br>	&#125;<br>	<span class="hljs-section">server</span> &#123;<br>		<span class="hljs-attribute">listen</span> <span class="hljs-number">82</span>;<br>		<span class="hljs-attribute">server_name</span> admin.web.itoken.funtl.com;<br>		<span class="hljs-section">location</span> / &#123;<br>			<span class="hljs-comment"># 域名 admin.web.itoken.funtl.com 的请求全部转发到 tomcat_server2 即 tomcat2 服务上</span><br>			<span class="hljs-attribute">proxy_pass</span> http://tomcatServer2;<br>			<span class="hljs-attribute">index</span> index.jsp index.html index.htm;<br>		&#125;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h2 id="创建docker-compose-yml"><a href="#创建docker-compose-yml" class="headerlink" title="创建docker-compose.yml"></a>创建docker-compose.yml</h2><p>创建文件: <code>/usr/local/nginx/docker-compose.yml</code>, 内容如下:</p>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">version</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&#x27;3.1&#x27;</span><br><span class="hljs-attribute">services</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">nginx</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">restart</span><span class="hljs-punctuation">:</span> <span class="hljs-string">always</span><br>    <span class="hljs-attribute">image</span><span class="hljs-punctuation">:</span> <span class="hljs-string">nginx</span><br>    <span class="hljs-attribute">container_name</span><span class="hljs-punctuation">:</span> <span class="hljs-string">nginx</span><br>    <span class="hljs-attribute">ports</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">81:9090</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">82:9091</span><br>    <span class="hljs-attribute">volumes</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">./conf/nginx.conf:/etc/nginx/nginx.conf</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">./data:/usr/share/nginx/wwwroot</span><br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -394,7 +405,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/hello/" class="category-chain-item">hello</a>
+  <a href="/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" class="category-chain-item">容器技术</a>
   
   
 
@@ -409,7 +420,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/hello/">#hello</a>
+        <a href="/tags/docker/">#docker</a>
       
     </div>
   
@@ -421,8 +432,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hello World</div>
-      <div>https://yqqyyq.github.io/2022/06/10/hello-world/</div>
+      <div>Docker部署Nginx-反向代理</div>
+      <div>https://yqqyyq.github.io/2021/11/30/docker/docker_nginx/</div>
     </div>
     <div class="license-meta">
       
@@ -434,7 +445,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年6月10日</div>
+          <div>2021年11月30日</div>
         </div>
       
       
@@ -477,21 +488,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/12/13/docker/docker_mysql_5.7/" title="Docker部署MySQL-5.7">
+                      <a href="/2022/06/10/hello-world/" title="Hello World">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Docker部署MySQL-5.7</span>
+                        <span class="hidden-mobile">Hello World</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
-                    
-                      <a href="/2021/11/30/docker/docker_nginx/" title="Docker部署Nginx-反向代理">
-                        <span class="hidden-mobile">Docker部署Nginx-反向代理</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
                     
                   </article>
                 </div>
