@@ -1,0 +1,1181 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.jpg">
+  <link rel="icon" href="/img/icon.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="yqqyyq">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Tuxedo简介Transaction for Unix has been Extended for Distributed Operation分布式操作扩展之后的Unix事务系统 Tuxedo是第一个严格意义上的中间件产品 123TUXEDO是在企业、Internet 这样的分布式运算环境中，开发和管理三层结构的客户&#x2F;服务器型关键任务应用系统的强有力工具。它具备分布式事务处理和应用通信功能，并提">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tuxedo-简介">
+<meta property="og:url" content="https://yqqyyq.github.io/2024/10/20/tuxedo/tuxedo/index.html">
+<meta property="og:site_name" content="yqqyyq">
+<meta property="og:description" content="Tuxedo简介Transaction for Unix has been Extended for Distributed Operation分布式操作扩展之后的Unix事务系统 Tuxedo是第一个严格意义上的中间件产品 123TUXEDO是在企业、Internet 这样的分布式运算环境中，开发和管理三层结构的客户&#x2F;服务器型关键任务应用系统的强有力工具。它具备分布式事务处理和应用通信功能，并提">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-10-20T01:59:31.000Z">
+<meta property="article:modified_time" content="2022-10-21T02:40:19.000Z">
+<meta property="article:author" content="yqqyyq">
+<meta property="article:tag" content="tuxdeo">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Tuxedo-简介 - yqqyyq</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yqqyyq.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>yqqyyq</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/back.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Tuxedo-简介"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        yqqyyq
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-10-20 09:59" pubdate>
+          2024年10月20日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="中间件"
+        id="heading-3cbfec336978067fe5295fb69a0ca202" role="tab" data-toggle="collapse" href="#collapse-3cbfec336978067fe5295fb69a0ca202"
+        aria-expanded="true"
+      >
+        中间件
+        <span class="list-group-count">(1)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-3cbfec336978067fe5295fb69a0ca202"
+           role="tabpanel" aria-labelledby="heading-3cbfec336978067fe5295fb69a0ca202">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2024/10/20/tuxedo/tuxedo/" title="Tuxedo-简介"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">Tuxedo-简介</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Tuxedo-简介</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2022年10月21日 上午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Tuxedo"><a href="#Tuxedo" class="headerlink" title="Tuxedo"></a>Tuxedo</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><code>Transaction for Unix has been Extended for Distributed Operation分布式操作扩展之后的Unix事务系统</code></p>
+<p><code>Tuxedo是第一个严格意义上的中间件产品</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs">TUXEDO是在企业、Internet 这样的分布式运算环境中，开发和管理三层结构的客户/服务器型关键任务应用系统的强有力工具。<br>它具备分布式事务处理和应用通信功能，并提供完善的各种服务来建立、运行和管理关键任务应用系统。<br>开发人员能够用它建立跨多个硬件平台、数据库和操作系统的可互操作的应用系统。<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">Tuxedo是一个事务处理(TP)监督器（<span class="hljs-keyword">transaction</span> processing monitor），它管理联机事务处理(OLTP)系统操作的事务。客户通过结构化查询语言(<span class="hljs-keyword">SQL</span>)调用，或其他类型的请求，产生对<span class="hljs-keyword">server</span>的请求。这个事务处理监督器确信，正确地进行了改动，以保证数据的完整性。这在一个事务能够改变多个位置的数据库的分布式数据库环境是很重要的。这个事务处理监督器使用双阶段提交，以保证全部的数据库都已经接收和认可了这些数据的正确性。<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ul>
+<li>屏蔽分布式环境中各种通信协议、硬件体系结构、操作系统、数据库和其它应用服务等方面的差异</li>
+<li>使分布于网络节点上的应用程序的各个单元部件之间能够进行互操作，并协调操作的一致性和完整性，最大限度地节省系统资源，提高系统性能</li>
+<li>Tuxedo 已经广泛地应用于金融、电信、制造业等各行各业的核心业务系统</li>
+</ul>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p><code>三层架构：客户端（表现层）-中间件服务层（业务逻辑层）-db</code><br>![](.&#x2F;img&#x2F;Pasted image 20230307174038.png)</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">应用 weblogic中间件的系统一般采用<span class="hljs-keyword">BS架构，大部分用HTTP协议，少量使用RMI协议</span><br><span class="hljs-keyword"></span>应用 Tuxedo中间件使用的是tuxedo协议<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="通讯"><a href="#通讯" class="headerlink" title="通讯"></a>通讯</h2><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">Tuxedo</span>服务器一次请求需要进行两次交互才可以<br><span class="hljs-symbol">Tuxedo</span>有两个负责通讯的进程(WSL,WSH)<br><br>客户端通过<span class="hljs-built_in">ip</span>地址和端口号与WSL建立连接，由WSL认证请求是否合法，返给客户端的响应中包含另一个<span class="hljs-built_in">ip</span>地址和端口号<br>客户端用新的<span class="hljs-built_in">ip</span>和端口号进行请求WSH<br></code></pre></td></tr></table></figure>
+<p>![](.&#x2F;img&#x2F;Pasted image 20230307174038.png)</p>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>[下载地址][下载地址-website]</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p><code>一个TUXEDO应用系统的所有资源都在一个文本文件中进行定义，该文件称为UBBCONFIG，在配置完成后，UBBCONFIG被编译成一个二进制的文件TUXCONFIG。</code></p>
+<p><code>在TUXEDO系统启动时,从该文件中读取系统的配置信息。UBBCONFIG文件类似WINDOWS下的*.INI文件。</code></p>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs shell">*RESOURCES<br>IPCKEY          123456<br><br>DOMAINID        simpapp<br>MASTER          simple<br>MAXACCESSERS    900<br>MAXSERVERS      10<br>MAXSERVICES     20<br>MODEL           SHM<br>LDBAL           N<br><br>*MACHINES<br>DEFAULT:<br>                APPDIR=&quot;/home/tuxedo/tuxedo11/tuxedo11gR1/applications/simpapp&quot;<br>                TUXCONFIG=&quot;/home/tuxedo/tuxedo11/tuxedo11gR1/applications/simpapp/tuxconfig&quot;<br>                TUXDIR=&quot;/home/tuxedo/tuxedo11/tuxedo11gR1&quot;<br>                MAXWSCLIENTS=5<br><br>txcentos        LMID=simple<br><br>*GROUPS<br>GROUP1<br>        LMID=simple     GRPNO=1 OPENINFO=NONE<br>JSLGRP<br>				LMID=simple     GRPNO=2<br>JREPGRP<br>        LMID=simple   	GRPNO=3<br><br>*SERVERS<br>DEFAULT:<br>                CLOPT=&quot;-A&quot;<br><br>simpserv        SRVGRP=GROUP1 SRVID=1<br>WSL SRVGRP=GROUP1 SRVID=10<br>CLOPT=&quot;-A -- -n //172.17.0.6:31000 -m 5 -M 10 -x 5&quot;<br><br>JSL SRVGRP=JSLGRP SRVID=755<br>CLOPT=&quot;-A -- -n //172.17.0.6:30000 -m 5 -M 10 -x 5&quot;<br><br>JREPSVR SRVGRP=JREPGRP SRVID=302<br>CLOPT=&quot;-A -- -W -P /home/tuxedo/tuxedo11/tuxedo11gR1/udataobj/jolt/repository/jrepository&quot;<br><br>*SERVICES<br>TOUPPER<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="配置详解"><a href="#配置详解" class="headerlink" title="配置详解"></a>配置详解</h3><p><code>一个TUXEDO系统可以跨越多台服务器，一台服务器上可以有多个GROUP，但一个GROUP只能在一台服务器上，一个GROUP中可以有多个SERVER，一个SERVER中可以有多个SERVICE</code></p>
+<h4 id="RESOURCES（必需）-与整这个系统有关的配置"><a href="#RESOURCES（必需）-与整这个系统有关的配置" class="headerlink" title="RESOURCES（必需）-与整这个系统有关的配置"></a>RESOURCES（必需）-<code>与整这个系统有关的配置</code></h4><table>
+<thead>
+<tr>
+<th align="center">配置项</th>
+<th align="center">说明</th>
+<th align="center">取值</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">IPCKEY</td>
+<td align="center">TUXEDO使用它标识公告板及其他的IPC资源<br/>它不能与该服务器上其他的IPC资源的ID号冲突</td>
+<td align="center">32769-262142</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">MASTER</td>
+<td align="center">指定该TUXEDO应用系统的MASTER服务器,在该服务器上对整个TUXEDO系统进行管理配置<br/>可以为该MASTER服务器指定一台备份服务器,当该MASTER服务器宕机,可从BACKUP服务器上进行管理<br/>在进行系统迁移时,也要指定BACKUP服务器</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">DOMAINID</td>
+<td align="center">TUXEDO应用系统的唯一标识</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">UID</td>
+<td align="center">可对该TUXEDO应用系统进行管理的TUXEDO系统管理员的用户ID<br/>在UNIX下就是UNIX系统的用户ID,默认为执行TMLOADCF的用户的ID<br/>在NT下该设置没有用,要设为0</td>
+<td align="center"></td>
+<td align="center">UID, GID, PERM:这三个参数控制对系统IPC资源的存取权限</td>
+</tr>
+<tr>
+<td align="center">GID</td>
+<td align="center">在UNIX下为UID中所指定的用户所在的组ID,在NT下该设置没有用,要设为0</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">PERM</td>
+<td align="center">指定对TUXEDO系统IPC资源的存取权限<br/>默认值为0666,即任何人都可以对该IPC资源进行存取</td>
+<td align="center">默认值为0666</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">MAXACCESSERS</td>
+<td align="center">在本系统的一个节点(一台服务器)上<br/>同时可以有多少个进程可以访问该TUXEDO系统的公告板<br/>它包括本地客户端进程,SERVER进程,但不包括管理进程如:BBL,DBBL</td>
+<td align="center">默认值为50</td>
+<td align="center">MAXACCESSERS,MAXSERVERS,MAXSERVICES:这三个参数控制该TUXEDO应用系统对IPC资源的使用情况</td>
+</tr>
+<tr>
+<td align="center">MAXSERVERS</td>
+<td align="center">在本系统中,总共可以有多少个SERVER存在,包括进行管理的SERVER,  如:BBL,TMS等。</td>
+<td align="center">默认值为50</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">MAXSERVICES</td>
+<td align="center">在本系统中,总共可以有多少个SEVICE存在,</td>
+<td align="center">默认值为100</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">MODLE</td>
+<td align="center">应用系统的部署方式</td>
+<td align="center">SHM: 单机或多台服务器但共用一个全局共享内存 <br/> MP: 多台服务器但没有共用一个全局共享内存</td>
+<td align="center">OPTION: LAN: 是多机（MP）部署模式  MIGRATE: 可对该系统进行迁移</td>
+</tr>
+<tr>
+<td align="center">SCANUNIT</td>
+<td align="center">指定检查的最小时间单位,它单位为秒,必须是5的倍数</td>
+<td align="center">默认值为10,即10秒</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">SANTIYSCAN</td>
+<td align="center">每隔多少个SCANUNIT检查一次, SANITYSCAN*SCANUNIT不能大于  300秒</td>
+<td align="center">默认值为12,即120秒</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">BLOCKTIME</td>
+<td align="center">指定一个消息可以阻塞多长时间<br/>如果过了SANITYSCAN*SCANUNIT秒该消息还没有发送出去,将超时出错<br/>SANITYSCAN*SCANUNIT不能大于32767秒</td>
+<td align="center">默认值为6,即60秒</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">LDBAL</td>
+<td align="center">要不要进行负载均衡</td>
+<td align="center">Y:要,N:不要,默认值为不要</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">MAXCONV</td>
+<td align="center">在一台服务器上最多可以有多少个会话同时存在</td>
+<td align="center">范围:0-32768,默认值为10</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">NOTIFY</td>
+<td align="center">设置消息的通知方式</td>
+<td align="center">默认为DIPIN<br/>IGNORE: 该TUXEDO系统中的CLIENT不接收任何消息<br/>SIGNAL: 用SIGUSR1,SIGUSR2信号通知CLIENT有消息到来，如果在非UNIX平台上设置采用该方式，那么会被自动转化为DIPIN方式。<br/>DIPIN: 当CLIENT调用ATMI函数时,顺便检查看是否有消息,如果有就发送给该CLIENT</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h4 id="MACHINES（必需）-一个TUXEDO应用系统可以跨越多台服务器-在该节中配置与每台服务器有关的信息"><a href="#MACHINES（必需）-一个TUXEDO应用系统可以跨越多台服务器-在该节中配置与每台服务器有关的信息" class="headerlink" title="MACHINES（必需）- 一个TUXEDO应用系统可以跨越多台服务器,在该节中配置与每台服务器有关的信息"></a>MACHINES（必需）- 一个TUXEDO应用系统可以跨越多台服务器,在该节中配置与每台服务器有关的信息</h4><p><code>该TUXEDO应用系统所包含的每台服务器都要在该节中进行配置 </code></p>
+<table>
+<thead>
+<tr>
+<th align="center">配置项</th>
+<th align="center">说明</th>
+<th align="center">取值</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">LMID</td>
+<td align="center">在TUXEDO，要为该应用系统中的每台服务器指定一个逻辑服务器名</td>
+<td align="center">uname -r</td>
+<td align="center">UID,GID,PERM,MAXACCESSERS,MAXCONV这些在RESOURCES中的配置,在MACHINES中可以被重新配置,并且这些新的配置值会覆盖在RESOURCES中的配置值</td>
+</tr>
+<tr>
+<td align="center">TUXCONFIG</td>
+<td align="center">配置文件TUXCONFIG所在的路径</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">TUXDIR</td>
+<td align="center">TUXEDO的安装目录</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">APPDIR</td>
+<td align="center">TUXEDO应用系统所在的目录</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">ENVFILE</td>
+<td align="center">该服务器上与TUXEDO有关的环境变量</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">TYPE</td>
+<td align="center">指定该服务器的类型<br/>当两台服务器的TYPE不一样时,在它们之间传送数据时要进行编码&#x2F;解码工作</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">ULOGPFX</td>
+<td align="center">指定ULOG文件所在的目录及前缀</td>
+<td align="center">默认目录为$APPDIR,前缀为ULOG</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h4 id="GROUPS（必需）-TUXEDO中的服务可被分为多个组-在该节中配置与组有关的信息"><a href="#GROUPS（必需）-TUXEDO中的服务可被分为多个组-在该节中配置与组有关的信息" class="headerlink" title="GROUPS（必需）-TUXEDO中的服务可被分为多个组,在该节中配置与组有关的信息"></a>GROUPS（必需）-TUXEDO中的服务可被分为多个组,在该节中配置与组有关的信息</h4><blockquote>
+<ul>
+<li>因为GROUP与数据库之间是一对一的关系,在一TUXEDO应用系统中,如果有多个数据库,就要配置多个GROUP,在该GROUP中配置TUXEDO与数据库的连接参数等</li>
+<li>数据依赖路由是以GROUP为单位的</li>
+<li>进行系统迁移时也时以GROUP为单位的一个GROUP有一个名字,还有一个GROUP</li>
+</ul>
+</blockquote>
+<h4 id="SERVERS（可选）"><a href="#SERVERS（可选）" class="headerlink" title="SERVERS（可选）"></a>SERVERS（可选）</h4><table>
+<thead>
+<tr>
+<th align="center">配置项</th>
+<th align="center">说明</th>
+<th align="center">取值</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">DEFAULT</td>
+<td align="center">在DEFAULT中的设置对所有的SERVER起作用</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">SRVGRP</td>
+<td align="center">该SERVER所在的GROUP</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">SRVID</td>
+<td align="center">该SERVER所对应的ID,在一个GROUP中必须唯一</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">MIN</td>
+<td align="center">该SERVER最少启动的进程数</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">MAX</td>
+<td align="center">该SERVER最多可启动的进程数</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">RESTART</td>
+<td align="center">该进程死掉时是否可以自动重起</td>
+<td align="center">默认为N(不可以)</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">GRACE，MAXGEN</td>
+<td align="center">在GRACE秒内，该进程最多可以重启MAXGEN次</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">RCMD</td>
+<td align="center">指定该SERVER重启时,要执行的一个可执行文件名</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">RQADDR</td>
+<td align="center">该请求队列的名字，一般设成与该SERVER的名字一样</td>
+<td align="center"></td>
+<td align="center">MSSQ</td>
+</tr>
+<tr>
+<td align="center">RAPERM</td>
+<td align="center">该请求队列的存取权限</td>
+<td align="center">默认为0666</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">REPLYQ</td>
+<td align="center">该SERVER中的某个SERVICE调用其他的SERVICE，并有返回结果<br/>则应设置REPLYQ&#x3D;Y，即把其他SERVICE的应答放到该队列中</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">CONV</td>
+<td align="center">该SERVER是否采用会话(CONVERSATION)通讯方式<br/>注意采用会话通讯方式的SERVICE要单独在一个SERVER中<br/>不能与采用其他通讯方式的SERVICE在同一个SERVER中,并且该SERVER要设置CONV&#x3D;Y</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">CLOPT -e</td>
+<td align="center">指定错误输出文件</td>
+<td align="center">默认为$APPDIR下的stderr</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">CLOPT -o</td>
+<td align="center">指定标准输出文件</td>
+<td align="center">默认为$APPDIR下的stdout</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">CLOPT -r</td>
+<td align="center">记录该SERVER中SERVICE每次调用的处理时间,并记录在错误输出文件中<br/>然后可采用TUXEDO的性能分析工具txrpt对该SERVER进行性能分析</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">CLOPT -A</td>
+<td align="center">发布该SERVER包含的所有的SERVICE</td>
+<td align="center"></td>
+<td align="center">WSL SRVGRP&#x3D;”GROUP1” SRVID&#x3D;1116 CLOPT&#x3D;”-A – -n&#x2F;&#x2F;192.168.120.113:8888 -m 2 -M 5 -x 6”</td>
+</tr>
+<tr>
+<td align="center">CLOPT –</td>
+<td align="center"><strong>表示服务器起来之后的参数，其中的值与UBB中的参数有约束</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">CLOPT -n</td>
+<td align="center"><strong>远程客户端通过该端口与服务器建立连接</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">CLOPT -m</td>
+<td align="center"><strong>最少启动多少个WSH进程</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">CLOPT -M</td>
+<td align="center"><strong>最多启动多少个WSH进程</strong></td>
+<td align="center">默认值为MAXWSCLIENTS&#x2F;m</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">CLOPT -x</td>
+<td align="center"><strong>每个WSH进程可同时处理多少个远程客户端</strong></td>
+<td align="center">默认值是10</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h4 id="SERVICES（可选）"><a href="#SERVICES（可选）" class="headerlink" title="SERVICES（可选）"></a>SERVICES（可选）</h4><table>
+<thead>
+<tr>
+<th align="center">配置项</th>
+<th align="center">说明</th>
+<th align="center">取值</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">AUTOTRAN</td>
+<td align="center">调用该SERVICE时是否自动启一个全局事务</td>
+<td align="center">默认为N</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">LOAD</td>
+<td align="center">如果采用负载均衡,指定该SERVICE的负载因子</td>
+<td align="center">默认为50</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">PRIO</td>
+<td align="center">指定该SERVICE的优先级</td>
+<td align="center">默认为50</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">DDR</td>
+<td align="center">指定数据依赖路由规则</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h4 id="NETWORK（可选）"><a href="#NETWORK（可选）" class="headerlink" title="NETWORK（可选）"></a>NETWORK（可选）</h4><h4 id="ROUTING（可选）"><a href="#ROUTING（可选）" class="headerlink" title="ROUTING（可选）"></a>ROUTING（可选）</h4><h2 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h2><h3 id="Jolt"><a href="#Jolt" class="headerlink" title="Jolt"></a>Jolt</h3><p><strong><code>启动Jolt，Jolt方式需license</code></strong></p>
+<p><strong><code>10之后的版本不需license</code></strong></p>
+<blockquote>
+<p><code>tmloadcf -y ubbsimple</code></p>
+<p><code>buildclient -o simpcl -f simpcl.c</code></p>
+<p><code>buildserver -o simpserv -f simpserv.c -s TOUPPER</code></p>
+</blockquote>
+<p><code>启动</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs sh">[oracle@txcentos simpapp]$ tmboot -y<br>Booting all admin and server processes <span class="hljs-keyword">in</span> /home/tuxedo/tuxedo11/tuxedo11gR1/applications/simpapp/tuxconfig<br>INFO: Oracle Tuxedo, Version 11.1.1.3.0, 64-bit, Patch Level (none)<br><br>Booting admin processes ...<br><br><span class="hljs-built_in">exec</span> BBL -A :<br>        process <span class="hljs-built_in">id</span>=11731 ... Started.<br><br>Booting server processes ...<br><br><span class="hljs-built_in">exec</span> simpserv -A :<br>        process <span class="hljs-built_in">id</span>=11743 ... Started.<br><span class="hljs-built_in">exec</span> WSL -A -- -n //172.17.0.6:31000 -m 2 -M 10 -x 5 :<br>        process <span class="hljs-built_in">id</span>=11744 ... Started.<br><span class="hljs-built_in">exec</span> JSL -A -- -n //172.17.0.6:32000 -m 3 -M 10 -x 5 :<br>        process <span class="hljs-built_in">id</span>=11747 ... Started.<br><span class="hljs-built_in">exec</span> JREPSVR -A -- -W -P /home/tuxedo/tuxedo11/tuxedo11gR1/udataobj/jolt/repository/jrepository :<br>        process <span class="hljs-built_in">id</span>=11751 ... Started.<br>5 processes started.<br>[oracle@txcentos simpapp]$./simpcl welcome<br>Returned string is: WELCOME<br>[oracle@txcentos simpapp]$<br></code></pre></td></tr></table></figure>
+
+
+<p><code>tmadmin</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs sh">[oracle@txcentos simpapp]$ tmadmin <br>tmadmin - Copyright (c) 1996-2010 Oracle.<br>Portions * Copyright 1986-1997 RSA Data Security, Inc.<br>All Rights Reserved.<br>Distributed under license by Oracle.<br>Tuxedo is a registered trademark.<br><br>&gt; psr<br>Prog Name      Queue Name  Grp Name      ID RqDone Load Done Current Service<br>---------      ----------  --------      -- ------ --------- ---------------<br>BBL            123456      simple         0      1        50 (  IDLE )<br>simpserv       00001.00001 GROUP1         1      2       100 (  IDLE )<br>WSL            00001.00011 GROUP1        11      0         0 (  IDLE )<br>JSL            00001.00012 GROUP1        12      0         0 (  IDLE )<br>JREPSVR        00001.00013 GROUP1        13      1        50 (  IDLE )<br><br>&gt; psc<br>Service Name Routine Name Prog Name  Grp Name  ID    Machine  <span class="hljs-comment"># Done Status</span><br>------------ ------------ ---------  --------  --    -------  ------ ------<br>TOUPPER      TOUPPER      simpserv   GROUP1     1     simple       2 AVAIL<br><br>&gt; pq<br>Prog Name      Queue Name  <span class="hljs-comment"># Serve Wk Queued  # Queued  Ave. Len    Machine</span><br>---------      ------------------- ---------  --------  --------    -------<br>JREPSVR        00001.00013       1         -         0         -     simple<br>BBL            123456            1         -         0         -     simple<br>JSL            00001.00012       1         -         0         -     simple<br>simpserv       00001.00001       1         -         0         -     simple<br>WSL            00001.00011       1         -         0         -     simple<br><br>&gt; pclt<br>     LMID         User Name       Client Name    Time    Status  Bgn/Cmmt/Abrt<br>--------------- --------------- --------------- -------- ------- -------------<br>simple          oracle          WSH              0:04:27 IDLE    0/0/0<br>simple          oracle          WSH              0:04:27 IDLE    0/0/0<br>simple          oracle          JSH              0:04:27 IDLE    0/0/0<br>simple          oracle          JSH              0:04:27 IDLE    0/0/0<br>simple          oracle          JSH              0:04:27 IDLE    0/0/0<br>simple          oracle          tmadmin          0:00:32 IDLE    0/0/0<br><br>&gt; bbs<br>Current Bulletin Board Status:<br>          Current number of servers: 5<br>         Current number of services: 16<br>   Current number of request queues: 5<br>    Current number of server <span class="hljs-built_in">groups</span>: 1<br>       Current number of interfaces: 0<br><br>&gt; pnw<br><br>        No network LMIDs available<br><br>&gt; q<br>[oracle@txcentos simpapp]$ <br></code></pre></td></tr></table></figure>
+
+
+
+<p><code>测试代码</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> example.java.bytecode;<br><br><span class="hljs-keyword">import</span> bea.jolt.JoltMessage;<br><span class="hljs-keyword">import</span> bea.jolt.JoltRemoteService;<br><span class="hljs-keyword">import</span> bea.jolt.JoltSession;<br><span class="hljs-keyword">import</span> bea.jolt.JoltSessionAttributes;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">JoltTest</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> JoltMessage <span class="hljs-title function_">callJoltTuxedo</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-comment">//String response=&quot;&quot;;</span><br>        JoltSession session;<br>        JoltSessionAttributes attr;<br>        JoltRemoteService service;<br>        <span class="hljs-comment">//JoltMessage message = null;</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">message</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <br>        <span class="hljs-type">String</span> <span class="hljs-variable">userName</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">userPassword</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">appPassword</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">userRole</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        attr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JoltSessionAttributes</span>();<br>        attr.setString(JoltSessionAttributes.APPADDRESS,<br>                <span class="hljs-string">&quot;//10.56.39.144:30000&quot;</span>);<br>        attr.setInt(JoltSessionAttributes.IDLETIMEOUT, <span class="hljs-number">300</span>);<br>        session = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JoltSession</span>(attr, userName, userRole, userPassword,<br>                appPassword);<br>        service = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JoltRemoteService</span>(<span class="hljs-string">&quot;TOUPPER&quot;</span>, session);<br><br>        service.setString(<span class="hljs-string">&quot;STRING&quot;</span>, <span class="hljs-string">&quot;a boy&quot;</span>);<br><br>        <span class="hljs-keyword">try</span> &#123;<br>            service.call(<span class="hljs-literal">null</span>);<br>            message = service.getStringDef(<span class="hljs-string">&quot;STRING&quot;</span>, <span class="hljs-literal">null</span>);<br>            <span class="hljs-comment">//System.out.println(message);</span><br>            <span class="hljs-comment">//response=message.toString();</span><br>            service.clear();<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br><br>        &#125; <span class="hljs-keyword">finally</span> &#123;<br>            session.endSession();<br><br>        &#125;<br>        <span class="hljs-keyword">return</span> message;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">JoltMessage</span> <span class="hljs-variable">joltMessage</span> <span class="hljs-operator">=</span> JoltTest.callJoltTuxedo();<br>        System.out.println(joltMessage);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p><code>调用结果</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">A BOY<br><br>Process finished with exit code <span class="hljs-number">0</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="JNI"><a href="#JNI" class="headerlink" title="JNI"></a>JNI</h3><h3 id="WTC"><a href="#WTC" class="headerlink" title="WTC"></a>WTC</h3><h3 id="zy-tuxedo"><a href="#zy-tuxedo" class="headerlink" title="zy-tuxedo"></a>zy-tuxedo</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs shell">JSLGRP   LMID=SITE1         GRPNO=21<br>JREGRP   LMID=SITE1         GRPNO=22<br><br>JSL SRVGRP=JSLGRP SRVID=49 RESTART=Y MAXGEN=98 CLOPT=&quot;-- -n//29.23.40.141:20023 -m1 M15 -x 15 -T&quot;<br>JREPSVR SRVGRP=JREGRP SRVID=50 CLOPT=&quot;-A --  -P /cpic/cpicitf/bin/jrepository&quot;<br><br>add SVC/D12850:vs=1:ex=1:bt=STRING:\<br>        bp:pn=STRING:pt=string:pf=167772161:pa=rw:ep:<br>add PKG/D12850:D12850:<br><br><br>tmshutdown -y<br>tmloadcf -y cpicubb<br>tmboot -y<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/73746356">什么是Tuxedo</a><br><a target="_blank" rel="noopener" href="https://docs.oracle.com/cd/E26665_01/tuxedo/docs11gr1/interm/jolt.html">tuxedo_jolt_oralce_11.1.1.3</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35427539/article/details/88633841">Linux下Tuxedo配置以及Java调用Tuxedo</a><br><a target="_blank" rel="noopener" href="https://my.oschina.net/hunterli/blog/12535">Java使用Jolt连接Tuxedo服务器</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/shutingwang/article/details/81566535">ques</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/konglongaa/article/details/76868334">ques2</a><br><a target="_blank" rel="noopener" href="http://blog.itpub.net/21634752/viewspace-689703/">dmadmin</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.oracle.com/cd/E72452_01/tuxedo/docs1222/int/index.html">官网</a><br><a target="_blank" rel="noopener" href="https://www.oracle.com/middleware/technologies/tuxedo-downloads.html">下载地址</a><br><a target="_blank" rel="noopener" href="https://my.oschina.net/wxpi/blog/1585604">Linux安装tuxedo</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36065860/article/details/100110167">linux 安装Tuxedo11g</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sxtobj/article/details/8587506">TUXEDO配置参数详解</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/konglongaa/article/details/51957327">Java调用Tuxedo方案浅析</a><br><a target="_blank" rel="noopener" href="https://www.oracle.com/support/license-codes/bea.html#JOLT">下载license</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/hutiewei2008/article/details/116202874">java使用jni连接tuxedo</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/f4761">Tuxedo与Weblogic互连指南</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ouyida3/article/details/40707503">使用java通过jolt调用tuxedo</a></p>
+<p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/ef4b38c5580216fc710afdcf.html">wsl_tuxedo</a><br><a target="_blank" rel="noopener" href="https://www.docin.com/p-825284483.html">wtc&#x2F;jolt_tuxedo</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="category-chain-item">中间件</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/tuxdeo/" class="print-no-link">#tuxdeo</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Tuxedo-简介</div>
+      <div>https://yqqyyq.github.io/2024/10/20/tuxedo/tuxedo/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>yqqyyq</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年10月20日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年10月21日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-cc-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/12/13/docker/docker_mysql_5.7/" title="Docker部署MySQL-5.7">
+                        <span class="hidden-mobile">Docker部署MySQL-5.7</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      苏ICP备2023012424号-1
+    </a>
+  </span>
+  
+</div>
+
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
